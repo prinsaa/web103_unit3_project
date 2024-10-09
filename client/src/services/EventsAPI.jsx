@@ -12,7 +12,7 @@ export const getAllEvents = async () => {
 };
 
 // Function to get an event by its ID
-export const getEventById = async (eventId) => {
+export const getEventsById = async (eventId) => {
   try {
     const response = await axios.get(`/api/events/${eventId}`);
     return response.data;
@@ -20,4 +20,9 @@ export const getEventById = async (eventId) => {
     console.error(`Error fetching event with ID ${eventId}:`, error);
     throw error;
   }
+};
+
+export default {
+  getAllEvents,
+  getEventsById,
 };
