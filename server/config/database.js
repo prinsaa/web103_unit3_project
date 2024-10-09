@@ -1,7 +1,11 @@
 import pg from 'pg'
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 const config = {
-    database: process.env.DATABASE_URL
+    connectionString: process.env.DATABASE_URL
 }
 
 export const pool = new pg.Pool(config)

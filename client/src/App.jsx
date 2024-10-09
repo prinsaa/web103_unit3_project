@@ -28,10 +28,10 @@ const App = () => {
       path: "/americanairlines",
       element: <LocationEvents index={4} />,
     },
-    {
-      path: "/events",
-      element: <Events />,
-    },
+    // {
+    //   path: "/events",
+    //   element: <Events />,
+    // },
   ]);
 
   return (
