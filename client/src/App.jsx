@@ -38,7 +38,7 @@ const App = () => {
   return (
     <div className="app">
       <header className="main-header">
-        <h1>UnityGrid Plaza</h1>
+        <h1>City View</h1>
 
         <div className="header-buttons">
           <Link to="/" role="button">

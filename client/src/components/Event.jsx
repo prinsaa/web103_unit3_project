@@ -11,8 +11,15 @@ const Event = (props) => {
   useEffect(() => {
     const fetchEventData = async () => {
       try {
-        const allEvents = await EventsAPI.getAllEvents();
-        setEvent(allEvents);
+        if (props.id) {
+          // If an ID is provided, fetch that event
+          const eventData = await EventsAPI.getEventsById(props.id);
+          setEvent(eventData);
+        } else {
+          // If no ID is provided, fetch all events
+          const allEvents = await EventsAPI.getAllEvents();
+          setEvent(allEvents);
+        }
       } catch (error) {
         console.error("Error fetching event data:", error);
       }
@@ -21,6 +28,40 @@ const Event = (props) => {
     fetchEventData();
   }, [props.id]); // Dependency array includes props.id
 
+  //   useEffect(() => {
+  //     (async () => {
+  //       try {
+  //         const eventData = await EventsAPI.getEventsById(props.id);
+  //         setEvent(eventData);
+  //       } catch (error) {
+  //         throw error;
+  //       }
+  //     })();
+  //   }, []);
+
+  //   useEffect(() => {
+  //     (async () => {
+  //       try {
+  //         const result = await dates.formatTime(event.time);
+  //         setTime(result);
+  //       } catch (error) {
+  //         throw error;
+  //       }
+  //     })();
+  //   }, [event]);
+
+  //   useEffect(() => {
+  //     (async () => {
+  //       try {
+  //         const timeRemaining = await dates.formatRemainingTime(event.remaining);
+  //         setRemaining(timeRemaining);
+  //         dates.formatNegativeTimeRemaining(remaining, event.id);
+  //       } catch (error) {
+  //         throw error;
+  //       }
+  //     })();
+  //   }, [event]);
+
   return (
     <article className="event-information">
       <img src={event.image} />
@@ -28,11 +69,11 @@ const Event = (props) => {
       <div className="event-information-overlay">
         <div className="text">
           <h3>{event.title}</h3>
-          {/* <p>
+          <p>
             <i className="fa-regular fa-calendar fa-bounce"></i> {event.date}{" "}
             <br /> {time}
           </p>
-          <p id={`remaining-${event.id}`}>{remaining}</p> */}
+          <p id={`remaining-${event.id}`}>{remaining}</p>
         </div>
       </div>
     </article>
